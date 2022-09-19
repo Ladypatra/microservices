@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: reverseproxy
-        image: kemiamb/reverseproxy:v2
+        image: ladypatra/reverseproxy:v2
         imagePullPolicy: Always
         ports:
           - containerPort: 80

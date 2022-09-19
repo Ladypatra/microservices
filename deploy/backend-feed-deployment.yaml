@@ -16,17 +16,30 @@ spec:
     spec:
       containers:
       - name: backend-feed
-        image: kemiamb/udagram-api-feed:v2
+        image: ladypatra/udagram-api-feed:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
-          requests:
-            cpu: 200m
           limits:
             cpu: 500m
+          requests:
+            cpu: 200m
         envFrom:
           - configMapRef:
               name: env-config
           - secretRef:
              name: env-secret
+---
+# apiVersion: autoscaling/v1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: backend-feed
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: backend-feed
+#   minReplicas: 3
+#   maxReplicas: 5
+#   targetCPUUtilizationPercentage: 70
